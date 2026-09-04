@@ -1,0 +1,442 @@
+/* ── Photo diagnosis — the signature element ──────────────────────────────
+   Card-Based Widget Container pushed editorial: a service form, ruled and
+   numbered, printed on paper a half-step lighter than the page. */
+
+.pd {
+  --pd-line: 24px;
+  --focus-ring: var(--rust);
+  --pd-pad: clamp(0.95rem, 0.55rem + 1.2vw, 1.6rem);
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xs);
+  box-shadow: var(--e-3);
+  color: var(--on-light);
+  isolation: isolate;
+}
+
+/* The offset hairline frame — the detail that makes it read as printed stock
+   rather than a UI card. */
+.pd::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--rule-ochre-soft);
+  border-radius: var(--r-xs);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Masthead --------------------------------------------------------------- */
+.pd-mast {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--s-4);
+  background: var(--teal-900);
+  color: var(--on-teal);
+  padding: calc(var(--pd-pad) * 0.72) var(--pd-pad);
+  border-bottom: 2px solid var(--ochre);
+  position: relative;
+  z-index: 3;
+}
+.pd-mast-text { display: flex; flex-direction: column; gap: 3px; }
+.pd-mast-kicker {
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label-wide);
+  text-transform: uppercase;
+  color: var(--ochre);
+}
+.pd-mast-title {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 600;
+  font-size: var(--fs-h2-sm);
+  line-height: 1.1;
+  letter-spacing: var(--tr-h3);
+  color: var(--cream);
+}
+.pd-mast-no {
+  align-self: flex-start;
+  flex: none;
+  padding: 4px 7px;
+  border: 1px solid var(--rule-on-teal-strong);
+  border-radius: var(--r-xs);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--on-teal-faint);
+}
+
+/* Steps ------------------------------------------------------------------ */
+.pd-form { padding: 0 var(--pd-pad); }
+
+.pd-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: var(--s-3);
+  padding-block: calc(var(--pd-pad) * 0.66);
+}
+.pd-step-n {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 700;
+  font-size: var(--fs-label-lg);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  color: var(--on-light-faint);
+  transition: color 240ms var(--ease-out-cubic);
+}
+.pd-step[data-active='true'] .pd-step-n { color: var(--rust); }
+
+.pd-step-body { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+.pd-step-body--pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-4);
+}
+.pd-field { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+
+/* Ruled-Line Ignition: the rule that closes each step. */
+.pd-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--rule);
+  transform-origin: left center;
+}
+.pd-step[data-active='true'] .pd-rule {
+  background: var(--rule-rust);
+  height: 2px;
+}
+
+.pd-label {
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-light-faint);
+}
+
+/* Writing-line inputs ---------------------------------------------------- */
+.pd-input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--rule-strong);
+  background: transparent;
+  padding: 4px 2px 6px;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--on-light);
+  border-radius: 0;
+  transition: border-color 240ms var(--ease-out-cubic),
+    background-color 240ms var(--ease-out-cubic);
+}
+.pd-input::placeholder { color: var(--on-light-faint); opacity: 0.75; }
+.pd-input:focus {
+  outline: none;
+  border-bottom-color: var(--rust);
+  background: rgb(217 164 65 / 0.07);
+}
+/* Keyboard focus keeps a real ring; the pointer-focus state is the rule and
+   the warm tint above. */
+.pd-input:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+}
+
+/* The textarea keeps its own writing lines. */
+.pd-textarea {
+  border-bottom: 0;
+  padding: 0 2px;
+  line-height: var(--pd-line);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--pd-line) - 1px),
+    var(--rule-soft) calc(var(--pd-line) - 1px),
+    var(--rule-soft) var(--pd-line)
+  );
+  background-attachment: local;
+  min-height: calc(var(--pd-line) * 2);
+}
+.pd-textarea:focus {
+  background-color: rgb(217 164 65 / 0.06);
+}
+
+.pd-error {
+  font-size: var(--fs-xs);
+  line-height: 1.3;
+  color: var(--rust);
+}
+
+/* Dropzone --------------------------------------------------------------- */
+.pd-drop {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  text-align: left;
+  padding: var(--s-3);
+  border: 1px dashed var(--rule-ochre);
+  border-radius: var(--r-xs);
+  background: var(--paper-2);
+  transition:
+    border-color var(--hover-dur) var(--ease-out-cubic),
+    background-color var(--hover-dur) var(--ease-out-cubic);
+}
+.pd-drop:hover,
+.pd-drop[data-dragging='true'] {
+  border-color: var(--teal);
+  background: var(--wash);
+}
+.pd-drop-icon {
+  --icon: 18px;
+  flex: none;
+  box-sizing: content-box;
+  padding: 7px;
+  color: var(--cream);
+  background: var(--teal);
+  border-radius: var(--r-xs);
+  transition: background-color var(--hover-dur) var(--ease-out-cubic);
+}
+.pd-drop:hover .pd-drop-icon { background: var(--rust); }
+.pd-drop-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pd-drop-lead {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--on-light);
+  line-height: 1.25;
+}
+.pd-drop-sub {
+  font-size: var(--fs-xs);
+  color: var(--on-light-faint);
+  line-height: 1.25;
+}
+
+/* Attached photo --------------------------------------------------------- */
+.pd-thumb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xs);
+  background: var(--paper-2);
+}
+.pd-thumb img {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: var(--r-xs);
+  flex: none;
+}
+.pd-thumb-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pd-thumb-name {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pd-thumb-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.pd-thumb-ok .lucide { --icon: 12px; }
+.pd-thumb-x {
+  margin-left: auto;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xs);
+  color: var(--on-light-dim);
+  transition: color var(--hover-dur) var(--ease-out-cubic),
+    border-color var(--hover-dur) var(--ease-out-cubic);
+}
+.pd-thumb-x .lucide { --icon: 14px; }
+.pd-thumb-x:hover { color: var(--rust); border-color: var(--rust); }
+
+/* Foot ------------------------------------------------------------------- */
+.pd-foot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-block: calc(var(--pd-pad) * 0.7) calc(var(--pd-pad) * 0.55);
+}
+.pd-submit { letter-spacing: 0.08em; }
+.pd-submit[data-sending='true'] { opacity: 0.72; pointer-events: none; }
+.pd-submit .lucide { transition: transform var(--hover-dur) var(--ease-out-quart); }
+.pd-submit:hover .lucide { transform: translateX(3px); }
+.pd-reassure { padding-inline: 2px; }
+
+/* Perforated tear strip -------------------------------------------------- */
+.pd-perf {
+  height: 9px;
+  border-top: 1px solid var(--rule);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--rule-ochre) 0 4px,
+    transparent 4px 11px
+  );
+  background-position: 0 3px;
+  background-size: 11px 1px;
+  background-repeat: repeat-x;
+  opacity: 0.75;
+}
+
+/* Success — Stamp Impression --------------------------------------------- */
+.pd-done {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--pd-pad);
+  text-align: left;
+}
+.pd-stamp {
+  position: absolute;
+  top: calc(var(--pd-pad) * 0.4);
+  right: var(--pd-pad);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 7px 12px;
+  border: 2px solid var(--rust);
+  border-radius: var(--r-xs);
+  color: var(--rust);
+  opacity: 0.82;
+  rotate: -8deg;
+  animation: pd-stamp-land 520ms var(--ease-out-quart) both;
+  pointer-events: none;
+}
+.pd-stamp-top {
+  font-size: var(--fs-label-lg);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.pd-stamp-rule { width: 100%; height: 1px; background: currentColor; opacity: 0.6; }
+.pd-stamp-bottom {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+@keyframes pd-stamp-land {
+  from { opacity: 0; scale: 1.16; rotate: -2deg; }
+  60% { opacity: 0.92; }
+  to { opacity: 0.82; scale: 1; rotate: -8deg; }
+}
+
+.pd-done-title {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 600;
+  font-size: var(--fs-h3-lg);
+  line-height: 1.15;
+  letter-spacing: var(--tr-h3);
+  max-width: 16ch;
+}
+.pd-done-body {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--on-light-dim);
+  max-width: 46ch;
+}
+.pd-done-meta {
+  display: flex;
+  gap: var(--s-6);
+  padding-block: var(--s-3);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.pd-done-meta dt {
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-light-faint);
+}
+.pd-done-meta dd {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.pd-done-actions { display: flex; flex-direction: column; gap: var(--s-3); }
+.pd-reset {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--on-light-dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  align-self: center;
+  transition: color var(--hover-dur) var(--ease-out-cubic);
+}
+.pd-reset:hover { color: var(--rust); }
+
+@media (max-width: 359px) {
+  .pd-step-body--pair { grid-template-columns: 1fr; gap: var(--s-3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-stamp { animation: none; }
+  .pd-input,
+  .pd-drop,
+  .pd-step-n { transition: none; }
+}
+
+/* ── Mobile: the form is compressed against the 390x844 fold budget so the
+      submit button and its reassurance line stay above the fold. ────────── */
+@media (max-width: 719px) {
+  .pd { --pd-pad: 0.8rem; --pd-line: 21px; }
+  .pd::before { inset: 4px; }
+  .pd-mast { padding-block: 0.5rem; }
+  .pd-mast-title { font-size: var(--fs-h3); }
+  .pd-mast-kicker { font-size: 0.625rem; }
+  .pd-mast-no { padding: 3px 5px; font-size: 0.5rem; }
+  .pd-step { padding-block: 0.5rem; grid-template-columns: 22px minmax(0, 1fr); gap: var(--s-2); }
+  .pd-step-n { line-height: 1.6; }
+  .pd-step-body { gap: 5px; }
+  .pd-label { font-size: 0.625rem; }
+  .pd-drop { padding: 7px; gap: var(--s-2); }
+  .pd-drop-icon { --icon: 15px; padding: 6px; }
+  .pd-drop-lead { font-size: var(--fs-xs); }
+  .pd-drop-sub { font-size: 0.6875rem; }
+  .pd-input { font-size: var(--fs-xs); padding-bottom: 4px; }
+  .pd-textarea { min-height: calc(var(--pd-line) * 2); }
+  .pd-step-body--pair { gap: var(--s-3); }
+  .pd-foot { padding-block: 0.65rem 0.5rem; gap: 7px; }
+  .pd-submit { padding: 0.72em 1rem; font-size: var(--fs-xs); }
+  .pd-reassure { font-size: 0.6875rem; line-height: 1.35; }
+  .pd-perf { height: 7px; }
+}
+
+/* The card sits inside .band-teal, so the shared light-on-dark rules for
+   .reassure have to be re-grounded for the paper stock it is printed on. */
+.pd .pd-reassure { color: var(--on-light-dim); }
+.pd .pd-reassure .lucide { color: var(--rust); opacity: 0.85; }

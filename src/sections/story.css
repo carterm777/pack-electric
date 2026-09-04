@@ -1,0 +1,97 @@
+/* ── Our Story — Single-Column Long-Form / Editorial Pull-Quote ───────────── */
+
+.story { position: relative; }
+
+.story-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr);
+  align-items: stretch;
+  gap: clamp(1.75rem, 1rem + 3.5vw, 5rem);
+}
+
+.story-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  max-width: 62ch;
+}
+.story .s-title { max-width: 16ch; }
+
+.story-prose { display: flex; flex-direction: column; gap: var(--s-4); }
+.story-prose p {
+  font-size: var(--fs-body);
+  line-height: 1.72;
+  color: var(--on-light-dim);
+}
+/* The opening paragraph carries a little more weight than the rest. */
+.story-prose:first-of-type p:first-child {
+  font-size: var(--fs-lead);
+  line-height: 1.62;
+  color: var(--on-light);
+}
+
+/* Pull-quote: a genuinely different type treatment, not just a bigger size. */
+.story-quote {
+  position: relative;
+  margin: var(--s-3) 0;
+  padding: var(--s-2) 0 var(--s-2) clamp(1rem, 3vw, 1.75rem);
+  border-left: 2px solid var(--rust);
+}
+.story-quote p {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 500;
+  font-size: var(--fs-quote);
+  line-height: 1.24;
+  letter-spacing: -0.02em;
+  color: var(--teal);
+  text-wrap: balance;
+}
+
+/* Photo stack ------------------------------------------------------------ */
+.story-stack-inner {
+  position: relative;
+  padding-bottom: clamp(2.5rem, 8vw, 5rem);
+}
+@media (min-width: 900px) {
+  /* Story Section Sticky Scroll Progress: the plate holds while the prose
+     scrolls past it, so the column is never a block of dead space. */
+  .story-stack-inner { position: sticky; top: calc(var(--header-h) + 2rem); }
+}
+.story-plate { margin: 0; }
+.story-plate img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--r-xs);
+}
+.story-plate--crew img { aspect-ratio: 4 / 3; object-position: center 42%; }
+.story-plate--crew figcaption {
+  margin-top: var(--s-3);
+  padding-right: 40%;
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--rule-ochre);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-light-faint);
+}
+.story-plate--winter {
+  position: absolute;
+  right: clamp(-1.5rem, -2vw, 0rem);
+  bottom: 0;
+  width: clamp(140px, 58%, 230px);
+  border: 6px solid var(--cream);
+  border-radius: var(--r-xs);
+  box-shadow: var(--e-2);
+}
+.story-plate--winter img { aspect-ratio: 1 / 1; }
+
+@media (max-width: 899px) {
+  .story-shell { grid-template-columns: minmax(0, 1fr); }
+  .story-stack { order: -1; }
+  .story-stack-inner { padding-bottom: clamp(2rem, 12vw, 3.5rem); }
+  .story-col { max-width: none; }
+  .story-plate--winter { right: 0; width: clamp(130px, 34%, 200px); }
+}

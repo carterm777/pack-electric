@@ -1,0 +1,125 @@
+/* ── Why Us — Numbered Reasons List / Underline Accent Rule ────────────────
+   The photograph breaks the grid: on desktop it runs the full height of the
+   section from the page's left edge to the shell's midpoint, and the list sits
+   in the right half. */
+
+.why { overflow: hidden; }
+.why-shell { position: relative; }
+
+.why-figure {
+  position: relative;
+  margin: 0 0 var(--s-6);
+  overflow: hidden;
+  border-radius: var(--r-xs);
+}
+.why-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% 46%;
+  aspect-ratio: 16 / 10;
+}
+.why-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--s-6) var(--s-5) var(--s-4);
+  background: linear-gradient(to top, rgb(10 33 32 / 0.86), transparent);
+  color: var(--on-teal);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.why-main { display: flex; flex-direction: column; gap: var(--s-6); }
+.why .s-title { max-width: 18ch; }
+
+/* Reasons ---------------------------------------------------------------- */
+.why-list { display: flex; flex-direction: column; }
+
+.why-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--s-4);
+  padding-block: var(--s-5);
+}
+.why-item:first-child { padding-top: 0; }
+
+.why-n {
+  display: block;
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display-lg);
+  font-optical-sizing: none;
+  font-weight: 700;
+  font-size: var(--fs-numeral);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--rust);
+  opacity: 0.65;
+  font-variant-numeric: tabular-nums;
+  width: 2.4ch;
+}
+
+.why-body { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+.why-title {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--tr-h3);
+  color: var(--teal);
+}
+.why-icon { --icon: 19px; color: var(--ochre); flex: none; }
+.why-copy {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--on-light-dim);
+  max-width: 52ch;
+}
+
+.why-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--rule);
+  transform-origin: left center;
+}
+.why-item:last-child .why-rule { background: var(--rule-ochre); }
+
+@media (min-width: 1024px) {
+  .why-figure {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 46%;
+    margin: 0;
+    border-radius: 0;
+  }
+  .why-figure img { aspect-ratio: auto; }
+  .why-cap { padding: var(--s-8) var(--s-6) var(--s-5); }
+  .why-main {
+    width: 50%;
+    margin-left: 50%;
+    padding-left: clamp(2rem, 4vw, 4.5rem);
+  }
+}
+
+@media (max-width: 1023px) {
+  /* .why-shell is already full-bleed, so the plate only needs its radius
+     dropped — a negative margin here would push the page wider. */
+  .why-figure { border-radius: 0; }
+}
+
+@media (max-width: 639px) {
+  .why-item { grid-template-columns: minmax(0, 1fr); gap: var(--s-2); }
+  .why-n { opacity: 0.55; }
+}

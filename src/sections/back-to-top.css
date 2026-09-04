@@ -1,0 +1,43 @@
+/* ── Back to top ──────────────────────────────────────────────────────────── */
+
+.btt {
+  position: fixed;
+  right: clamp(1rem, 2vw, 2rem);
+  bottom: clamp(1rem, 2vw, 2rem);
+  z-index: 55;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--rule-ochre);
+  border-radius: var(--r-sm);
+  background: var(--teal-900);
+  color: var(--ochre);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition:
+    opacity 320ms var(--ease-out-cubic),
+    transform 320ms var(--ease-out-quart),
+    background-color var(--hover-dur) var(--ease-out-cubic),
+    color var(--hover-dur) var(--ease-out-cubic);
+}
+.btt[data-show='true'] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.btt:hover {
+  background: var(--rust);
+  color: var(--cream);
+  border-color: var(--rust);
+}
+.btt .lucide { --icon: 17px; }
+
+@media (max-width: 1023px) {
+  .btt { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btt { transition: background-color var(--hover-dur) linear; }
+}

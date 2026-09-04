@@ -1,0 +1,259 @@
+You are building a one-page cold-outreach demo site in React. This needs to look like a genuinely premium, $10,000+ custom local-business build — luxurious, high-fidelity, restrained, not a template, not AI-generated. This business has no existing site — brand, contact info, and copy below are freshly created for this demo. (Its current web presence at packelectric.ca is an unfinished, barebones default WordPress install with no real business content — only a name, phone number, and email address were real.)
+
+WORKFLOW — FOLLOW EXACTLY
+1. This project's working directory already contains a copy of the section-style-repo-animation+ folder. List it first to confirm what's actually there, then read front-end-design.md from its root exactly: build a token system first (but use the fonts/colors given below as fixed — don't re-derive a palette), avoid its named generic-AI-design defaults, watch CSS selector specificity so section-level and element-level classes don't cancel each other out, and take screenshots to self-critique against this brief before opening the preview.
+2. For EVERY section on this page, consult section-style-repo.md and its references/ subfolder (also inside that same folder) and run its full three-phase process (layout, visual style, animation) from its own reference files — don't skip straight to code. Use its selection log to keep real variety across sections on this page. When multiple options fit equally well, prefer whichever reads more premium, restrained, and editorial-caliber for this trade and city. Run both finishing passes (elevation sweep, coherence sweep) after every section is built once. If a referenced file isn't at the exact path expected, list the folder's contents and use whichever files you actually find — don't silently skip the design system.
+3. Build the full site locally.
+4. Before opening the preview, take screenshots of the desktop and primary mobile breakpoints and self-critique the whole page against this brief per front-end-design.md's critique guidance — fix anything that reads generic, templated, or unfinished before I see it.
+5. Open a live preview window automatically once built. Wait for review.
+6. I will request changes/fixes — make them in this same session.
+7. Do NOT deploy until I explicitly say "push and deploy."
+8. On "push and deploy": call deploy_to_vercel with target: production,
+   name: pack-electric (fallback to pack-electric-red-deer only if the exact
+   name is unavailable). Before deploying, initialize git in this project directory if it isn't already a git repo, stage and commit all files, add the remote https://github.com/carterm777/pack-electric (this repo already exists on GitHub, created empty), and push to its main branch.
+9. Add <meta name="robots" content="noindex, nofollow"> to every page.
+
+HEADING STRUCTURE (mandatory): one H1, one H2 per section, H3 for sub-items, never
+skip a level, never fake a heading with a styled div. Title Case all headers.
+
+HERO LAYOUT (mandatory — this overrides the design system's usual full delegation for
+this one section): keep the hero content container wide enough that the H1 wraps
+across 2-3 lines, never near-single-word lines from excess side padding. Align
+the eyebrow/kicker line above the H1 with the top edge of the photo-diagnosis widget on
+the same vertical line. Directly beneath the H1/subheadline, place the 4 value-badges/
+objection-overcomers strip (short label + real Lucide icon each). Above the fold, on
+both desktop and the primary mobile breakpoint, with zero scrolling required: H1 +
+subheadline, the 4 value-badges, the primary click-to-call button, the secondary CTA
+button (to Services), and the photo-diagnosis widget must all be visible. (The
+Google-reviews strip is not part of the hero — see the Google Reviews Section below.)
+
+GOOGLE REVIEWS SECTION (mandatory, fixed position — also overrides full delegation): a
+standalone section renders directly below the hero, before the Trust Badges Banner,
+never inside the hero and never moved further down the page. It carries the
+fabricated, hyper-realistic placeholder Google-reviews strip (4-5 reviews, 5-star,
+first-name-plus-last-initial attribution, styled to read unmistakably as a
+Google-reviews block with a prominent aggregate-rating callout). Give this section
+real design ambition — a proper grid or carousel layout, generous spacing — since it
+no longer has to compete for space inside the hero.
+
+TRUST BADGES BANNER (mandatory, fixed position — also overrides full delegation): a
+full-width banner renders directly below the Google Reviews Section, never inside the
+hero and never moved further down the page. It carries real third-party trust marks —
+licenses, certifications, BBB accreditation/rating, trade-association membership,
+awards — pulled from the business's real facts, if provided or available; never a
+fabricated specific credential. Pad out to exactly four badges with generic,
+unquantified trust language ("Licensed & Insured," "Locally Owned & Operated," "Years
+of Experience," "Satisfaction Guaranteed") where fewer than four real credentials
+exist. Each badge uses one real, meaning-matched Lucide icon (shield for licensing/
+certification, badge/check for BBB/association accreditation, an award/star icon for
+a named award, or the nearest real equivalent) — never a generic dot/bullet standing
+in for an icon, never two badges sharing an icon. Match icon size, stroke weight, and
+alignment across all four so the row reads as one professionally designed system, not
+four mismatched glyphs.
+
+IMAGES: check this project folder for a folder named "images." If it exists, use only
+those images. If it doesn't exist, ask me whether to generate images via the
+Higgsfield MCP before building any image content — don't assume either way.
+
+BUSINESS INFO
+Business Name: Pack Electric
+Location: Red Deer & Central Alberta, AB, Canada
+Industry: Residential/commercial electrical services
+Source: No existing site — invented. (packelectric.ca is a barebones, unfinished
+default WordPress install with no real content beyond name/phone/email.)
+Extracted/decided facts summary: Real — business name, phone (403-336-9332), email
+(packelectric@gmail.com), 403 area code (Central Alberta). Everything else invented
+per the no-real-content fallback: services, positioning, service-area towns, colors,
+fonts, story, and reviews are all freshly created and industry-typical, not sourced
+from the real business. ASSUMPTION FLAGGED: no specific city was ever stated on the
+real site — "Red Deer" is inferred only from the 403 area code as a plausible Central
+Alberta hub; confirm with Carter before this ships if the real city is known.
+Meta description (150-160 chars, local, not a copy of the hero): Licensed electricians
+serving Red Deer and Central Alberta with panel upgrades, wiring repairs, lighting,
+and EV charger installs. Free estimates.
+
+BRAND IDENTITY
+Fonts: Display — Fraunces / Body — Karla (source: invented)
+Colors: Primary #1F5F5B / Secondary #C1592B / Accent #D9A441 / Dark #262626 / Light #F7F5F2
+  (source: invented — the real site had no extractable colors at all, only a bare
+  default WordPress theme, so this palette was built fresh. Deliberately avoided the
+  reflex blue/yellow electrician default and the reflex Montserrat/Poppins +
+  Open Sans/Lato font pairing.)
+Voice: Direct, plainspoken, blue-collar Central Alberta trade voice — warm but
+unpolished and practical, never agency-slick. Vocabulary do: breaker, panel, service
+upgrade, wiring, GFCI, tripped. Vocabulary don't: no "premium," "bespoke,"
+"cutting-edge," "state-of-the-art," no big-city corporate polish. Register: casual and
+direct, short sentences, contractions welcome, an occasional fragment for emphasis.
+
+CONTACT INFO (real where found, placeholder clearly marked otherwise)
+Phone: 403-336-9332 (real)
+Email: packelectric@gmail.com (real)
+Address: Red Deer, AB, Canada (placeholder — no real street address exists; city is an
+inferred assumption, see note above)
+
+HEADER STRUCTURE
+Subheader: 403-336-9332 / packelectric@gmail.com / Red Deer, AB, Canada
+Nav (centered): Home · About · Services (dropdown: Panel & Service Upgrades, Home
+Rewiring, Lighting Installation & Design, Electrical Troubleshooting & Repairs, EV
+Charger Installation, Outlet & Switch Installation, Ceiling Fan Installation, Surge
+Protection, Generator Panel Installation, Smoke & CO Detector Installation, Hot Tub &
+Appliance Wiring, Knob-and-Tube Rewiring, Small Commercial Electrical, Tenant
+Improvement Wiring, Electrical Safety Inspections) · Service Areas (dropdown: Red
+Deer, Sylvan Lake, Blackfalds, Lacombe, Innisfail, Penhold, Bowden, Eckville) · FAQ ·
+Blog · Contact
+Anchor map: Services → Core Services section / Service Areas → Coverage section /
+About → Story / FAQ → FAQ / Contact → Final CTA / Blog → Footer
+Right: click-to-call button + phone icon
+Mobile: no hamburger — nav reduces to click-to-call only while scrolling
+
+FOOTER STRUCTURE (4 columns):
+1. Logo (wordmark) + mission statement + social icons: "We're a Central Alberta
+   electrical company serving Red Deer and the surrounding communities with honest
+   pricing and dependable scheduling. Call us for anything from a single repair to a
+   full panel upgrade."
+2. "Our Services" + Panel & Service Upgrades, Home Rewiring & Repairs, Lighting
+   Installation, Electrical Troubleshooting, EV Charger Installation
+3. "Quick Links" + Home, About, Services, Service Areas, FAQ, Contact
+4. Pack Electric, Red Deer, AB, Canada (placeholder), 403-336-9332
+
+CONVERSION ELEMENTS — build all of these, none functional/backend-connected:
+- Photo-diagnosis uploader in hero (image + description + name/phone, client-side
+  success state, no backend) — this is the centerpiece and this page's signature
+  element; give it the most design ambition on the page.
+- 4 value-badges/objection-overcomers directly in the hero, beneath the headline/
+  subheadline: Free Estimates (icon: clipboard-list), Satisfaction Guaranteed (icon:
+  thumbs-up), Licensed & Insured (icon: shield-check), Locally Owned & Operated (icon:
+  map-pin).
+- Same primary CTA repeated at natural points down the page — one ask, several spots.
+- Click-to-call everywhere (tel: links) + mobile sticky call-only bar.
+- Click-to-text (sms: link) in the final CTA and footer.
+- Fabricated, hyper-realistic placeholder Google-reviews strip in its own Google
+  Reviews Section directly below the hero, never inside the hero — label as
+  placeholder needing real GBP reviews before real launch.
+- Trust Badges Banner directly below the Google Reviews Section — all four badges are
+  generic, unquantified trust language (no real credentials exist for this invented
+  build): Fully Licensed & Insured (icon: shield), Community-Based, Locally Run (icon:
+  home), Years Of Hands-On Experience (icon: award), 100% Satisfaction Guarantee (icon:
+  check-circle).
+- Reassurance microcopy beside every form ("no cost, no obligation, we don't share
+  your info").
+- Convincing non-backend success state on every form.
+(No financing/payment-plan callout and no 24-hour/emergency messaging — neither was
+confirmed for this business, and this is the invented-business path, so neither
+appears anywhere on the page.)
+
+Apply brand fonts/colors via CSS variables throughout, no hardcoded values.
+
+PAGE COPY
+
+[HERO]
+Headline: Trusted Residential Electricians Serving Red Deer & Central Alberta
+Subheadline: Experienced electricians delivering safe, code-compliant wiring and panel
+work for homes and businesses across Central Alberta.
+Value badges: Free Estimates (clipboard-list) · Satisfaction Guaranteed (thumbs-up) ·
+Licensed & Insured (shield-check) · Locally Owned & Operated (map-pin)
+
+[GOOGLE REVIEWS SECTION]
+Aggregate: 4.9 out of 5, based on 63 Google reviews
+1. Jason M. — ★★★★★ — "Called about a breaker that kept tripping every time we ran the
+   dryer. They found the issue in twenty minutes and had it fixed before supper."
+2. Karen D. — ★★★★★ — "We were quoted a fair price for our panel upgrade and that's
+   exactly what we paid. No surprises on the invoice."
+3. Trevor L. — ★★★★★ — "Explained why our old fuse panel needed replacing before we
+   asked. Made the whole thing easy to understand."
+4. Priya S. — ★★★★★ — "Booked us in for the EV charger install within the week and
+   walked us through where it would sit in the garage."
+5. Wade F. — ★★★★★ — "Showed up when they said they would and cleaned up after
+   themselves. That put them ahead of the last two electricians we tried."
+
+[TRUST BADGES BANNER]
+Fully Licensed & Insured (shield) · Community-Based, Locally Run (home) · Years Of
+Hands-On Experience (award) · 100% Satisfaction Guarantee (check-circle)
+
+[WHY US]
+1. Upfront, Honest Pricing (icon: hand-coins) — We walk through the cost before any
+   tools come out, so the number on the invoice is the number we quoted.
+2. Licensed and Insured Work (icon: shield-check) — Every job, from a single outlet to
+   a full panel swap, meets the electrical code inspectors check for.
+3. Scheduling You Can Count On (icon: calendar-check) — We show up in the window we
+   give you, and we call ahead if a job runs long.
+4. Clean, Respectful Job Sites (icon: sparkles) — We put down floor protection before
+   we start and haul away every offcut and packaging scrap when we're done.
+
+[SERVICES]
+1. Panel & Service Upgrades — We replace outdated fuse panels and undersized services
+   with a system sized for how your home or building uses power today.
+2. Home Rewiring & Wiring Repairs — From a single room to a full-house rewire, we trace
+   down the problem first so you're not paying to replace wiring that's still doing
+   its job.
+3. Lighting Installation — Pot lights, fixture swaps, and outdoor lighting, wired
+   cleanly and finished properly the first time.
+4. Electrical Troubleshooting & Repairs — Tripped breakers, dead outlets, and
+   flickering lights all have a real cause. We find it instead of guessing.
+5. EV Charger Installation — We check what your panel can handle before we recommend a
+   charger, then install it where it makes sense for your garage or driveway.
+
+[SERVICE AREA / COVERAGE]
+Most days, our trucks are somewhere between Red Deer and the smaller communities
+around it. We serve Red Deer, Sylvan Lake, Blackfalds, Lacombe, Innisfail, and
+Penhold, with panel work, rewiring, lighting, and repair calls across all of them.
+
+[OUR STORY]
+We started this company because too many Central Alberta homeowners had the same
+story: an electrician who quoted one number and billed another, or a job that got
+scheduled and then quietly pushed back three times. That's the part of the trade we
+wanted no part of.
+
+So we built the business around the parts that matter most to the person paying the
+bill. A quote that holds. A crew that shows up when it says it will. Work that passes
+inspection the first time because it was done right the first time, not patched
+together to get out the door faster.
+
+Most calls start the same way — a breaker that keeps tripping, a panel older than the
+house's second owner, an outlet that just went dead one afternoon. Small jobs and big
+jobs get the same attention: figure out what's wrong before touching a single wire. We
+keep the truck stocked for the common repairs, so a lot of calls get solved in one
+visit instead of two.
+
+Central Alberta winters are hard on electrical systems in ways a lot of homeowners
+don't think about until something fails on the coldest morning of the year. We've seen
+enough panels give out in January to know the small warning signs are worth catching
+early, on our schedule, not yours.
+
+[FINAL CTA]
+Headline: Need An Electrician Who Shows Up When They Say They Will?
+Supporting sentence: Call today for a free estimate on your wiring, panel, or lighting
+project — we're happy to talk through the job before you book anything.
+Action: Call 403-336-9332 or text us to get started.
+
+[FAQ]
+Q: How do I know if my breaker panel needs to be replaced?
+A: If breakers trip often, your panel still uses fuses, or you're planning a major
+renovation or EV charger, it's worth having a licensed electrician take a look. A
+quick inspection tells you whether you need a full panel upgrade or just a repair, and
+we'll always give you the honest answer either way.
+
+Q: Do you offer free estimates?
+A: Yes. We'll come take a look, walk you through what the job involves, and give you a
+clear number before any work starts, with no obligation to book.
+
+Q: Can you install an EV charger in my garage?
+A: In most cases, yes. We check your panel's capacity first to confirm it can handle
+the extra load, then recommend the right charger and location for your garage or
+driveway.
+
+Q: Why do my lights flicker when a large appliance turns on?
+A: This usually points to a loose connection, an overloaded circuit, or wiring that's
+due for an upgrade. It's worth having it checked before it turns into a bigger repair.
+
+Q: Do you work on both homes and small businesses?
+A: Yes. We handle residential wiring, panel upgrades, and lighting, along with smaller
+commercial electrical work for shops and offices across Central Alberta.
+
+[FOOTER COPY]
+Mission statement: We're a Central Alberta electrical company serving Red Deer and the
+surrounding communities with honest pricing and dependable scheduling. Call us for
+anything from a single repair to a full panel upgrade.
+Footer services list: Panel & Service Upgrades, Home Rewiring & Repairs, Lighting
+Installation, Electrical Troubleshooting, EV Charger Installation
+Footer quick links: Home, About, Services, Service Areas, FAQ, Contact

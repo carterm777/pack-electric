@@ -1,0 +1,113 @@
+/* ── Final CTA — Full-Width Banner / Textured Warm Background ──────────────
+   The one band where the warm half of the palette takes the whole width. Rust
+   stays a small mark: it is spent on the button and nothing else. */
+
+.cta {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 2rem + 5vw, 7rem);
+  border-block: 1px solid var(--rule-ochre);
+}
+
+.cta-bed {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.cta-bed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    var(--warm) 0%,
+    rgb(239 227 203 / 0.72) 40%,
+    rgb(239 227 203 / 0.25) 72%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+.cta-bed-img {
+  position: absolute;
+  inset: -6%;
+  background-image: url('/images/flatlay-materials.webp');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  filter: sepia(0.35) saturate(0.7);
+  mix-blend-mode: multiply;
+}
+
+.cta-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  align-items: start;
+  gap: clamp(1.5rem, 1rem + 3vw, 4rem);
+}
+
+.cta-title {
+  font-size: var(--fs-h2);
+  color: var(--teal-900);
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.cta-body { display: flex; flex-direction: column; gap: var(--s-4); }
+.cta-copy {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--on-warm-dim);
+  max-width: 46ch;
+}
+.cta-action {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+  letter-spacing: var(--tr-h3);
+  color: var(--teal);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule-ochre);
+}
+
+.cta-buttons { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.cta-call {
+  font-size: var(--fs-body);
+  padding: 0.95em 1.6em;
+  translate: var(--mag-x, 0) var(--mag-y, 0);
+  transition:
+    background-color var(--hover-dur) var(--ease-out-cubic),
+    box-shadow var(--hover-dur) var(--ease-out-cubic),
+    translate 180ms var(--ease-out-cubic);
+}
+.cta-call:hover { transform: none; box-shadow: var(--e-2); }
+.cta-text {
+  --btn-fg: var(--teal-900);
+  --btn-edge: rgb(38 38 38 / 0.3);
+  font-size: var(--fs-body);
+  padding: 0.95em 1.4em;
+}
+.cta-text:hover { --btn-edge: var(--teal); --btn-fg: var(--teal); }
+
+.cta-reassure { max-width: 46ch; }
+
+@media (max-width: 899px) {
+  .cta-inner { grid-template-columns: minmax(0, 1fr); }
+  .cta-title { max-width: 20ch; }
+  .cta-buttons { flex-wrap: nowrap; }
+  .cta-call,
+  .cta-text {
+    flex: 1 1 0;
+    font-size: var(--fs-sm);
+    padding: 0.9em 0.6em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-call { transition: background-color var(--hover-dur) linear; translate: none; }
+}

@@ -1,0 +1,132 @@
+/* ── Footer — Mega Footer / Textured Footer Background ────────────────────── */
+
+.ftr {
+  position: relative;
+  background: var(--teal-950);
+  padding-block: clamp(2.75rem, 1.6rem + 4vw, 5rem) 0;
+  overflow: hidden;
+}
+/* Copper coil texture under the teal — warmth without a literal photograph. */
+.ftr::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/tex-copper.webp');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ftr-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  gap: clamp(1.75rem, 1rem + 3vw, 4rem);
+  padding-bottom: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+}
+
+.ftr-col { display: flex; flex-direction: column; gap: var(--s-4); min-width: 0; }
+
+.ftr-mark {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 700;
+  font-size: var(--fs-h3-lg);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--cream);
+}
+.ftr-mission {
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--on-teal-dim);
+  max-width: 42ch;
+}
+
+.ftr-social { display: flex; gap: var(--s-2); }
+.ftr-social a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--rule-on-teal);
+  border-radius: var(--r-xs);
+  color: var(--on-teal-dim);
+  transition:
+    color var(--hover-dur) var(--ease-out-cubic),
+    border-color var(--hover-dur) var(--ease-out-cubic),
+    transform var(--hover-dur) var(--ease-out-quart);
+}
+.ftr-social a .lucide { --icon: 16px; }
+.ftr-social a:hover {
+  color: var(--teal-950);
+  background: var(--ochre);
+  border-color: var(--ochre);
+  transform: translateY(-2px);
+}
+
+.ftr-h {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label-wide);
+  text-transform: uppercase;
+  color: var(--ochre);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--rule-on-teal);
+}
+
+.ftr-list,
+.ftr-contact { display: flex; flex-direction: column; gap: var(--s-3); }
+.ftr-list a,
+.ftr-contact a,
+.ftr-contact span {
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  color: var(--on-teal-dim);
+}
+.ftr-list a:hover,
+.ftr-contact a:hover { color: var(--cream); }
+
+.ftr-contact li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  min-width: 0;
+}
+.ftr-contact .lucide { --icon: 16px; color: var(--ochre); margin-top: 2px; flex: none; }
+.ftr-email { overflow-wrap: anywhere; }
+
+.ftr-base {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding-block: var(--s-4);
+  border-top: 1px solid var(--rule-on-teal);
+  font-size: var(--fs-xs);
+  color: var(--on-teal-faint);
+}
+.ftr-note { font-style: italic; }
+
+@media (max-width: 899px) {
+  .ftr-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ftr-col--brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 479px) {
+  .ftr-inner { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ftr-social a { transition: color var(--hover-dur) linear; }
+  .ftr-social a:hover { transform: none; }
+}

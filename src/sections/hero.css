@@ -1,0 +1,252 @@
+/* ── Hero — Asymmetric Layered Hero / Editorial Typographic Overlap ────────
+   The whole section is built around one constraint: H1, subhead, four badges,
+   both CTAs and the intake form all sit above the fold at 1440x900 and at
+   390x844. Every vertical value here is chosen against that budget. */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(1.35rem, 0.4rem + 2.2vw, 3rem) clamp(1.5rem, 0.5rem + 2.4vw, 3.25rem);
+}
+
+/* Bleeding image: the photo runs off the right edge of the page and the intake
+   form is set on top of it, so it is never a rectangle inside a box. */
+.hero-art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  overflow: hidden;
+  width: min(72%, 1060px);
+  z-index: 0;
+}
+.hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 46% 62%;
+  filter: saturate(0.8) contrast(1.04) brightness(1.16);
+}
+.hero-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      var(--teal-900) 0%,
+      var(--teal-900) 15%,
+      rgb(15 46 44 / 0.93) 30%,
+      rgb(15 46 44 / 0.68) 62%,
+      rgb(15 46 44 / 0.46) 100%
+    ),
+    linear-gradient(to bottom, rgb(10 33 32 / 0.3), transparent 36%, rgb(10 33 32 / 0.4));
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 462px);
+  align-items: stretch;
+  gap: clamp(1.5rem, 0.4rem + 2.8vw, 3.75rem);
+}
+
+/* Copy column ------------------------------------------------------------ */
+.hero-copy { display: flex; flex-direction: column; }
+
+/* Optical alignment: the eyebrow's cap line, not its line box, sits on the
+   intake form's top edge. */
+.hero-eyebrow {
+  color: var(--ochre);
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 600;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tr-display);
+  color: var(--cream);
+  max-width: 21ch;
+  margin-top: clamp(0.5rem, 0.2rem + 0.8vw, 1rem);
+  text-wrap: pretty;
+}
+/* The kit's WordReveal puts the inter-word space inside an overflow-hidden
+   span, where it collapses. The gap is restored here instead. */
+.hero-h1 .wr-word {
+  padding-bottom: 0.08em;
+  /* The kit nests the inter-word space inside the overflow-hidden span, where
+     it sometimes collapses and sometimes does not. Cancelling it and setting
+     the gap explicitly makes the word rhythm deterministic either way. */
+  word-spacing: -0.25em;
+  margin-right: 0.07em;
+}
+.hero-h1 .wr-inner { word-spacing: normal; }
+.hero-h1 .wr-word:last-child { margin-right: 0; }
+
+.hero-sub {
+  margin-top: clamp(0.55rem, 0.3rem + 0.9vw, 1.1rem);
+  max-width: 50ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--on-teal-dim);
+}
+
+/* Value badges ----------------------------------------------------------- */
+.hero-badges {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: clamp(0.8rem, 0.5rem + 1.4vw, 1.9rem);
+  border-top: 1px solid var(--rule-on-teal);
+  border-bottom: 1px solid var(--rule-on-teal);
+}
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-3) var(--s-3) var(--s-3);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  color: var(--on-teal);
+  border-left: 1px solid var(--rule-on-teal);
+}
+.hero-badge:first-child { border-left: 0; padding-left: 0; }
+.hero-badge .lucide {
+  --icon: 17px;
+  color: var(--ochre);
+  flex: none;
+}
+
+/* CTAs ------------------------------------------------------------------- */
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: clamp(0.8rem, 0.5rem + 1.4vw, 1.75rem);
+}
+.hero-call { font-size: var(--fs-body); padding: 0.9em 1.5em; }
+.hero-secondary .lucide {
+  --icon: 16px;
+  transition: transform var(--hover-dur) var(--ease-out-quart);
+}
+.hero-secondary:hover .lucide { transform: translateX(3px); }
+
+/* Foot line — anchors the copy column against the taller form card. */
+.hero-foot {
+  margin-top: auto;
+  padding-top: var(--s-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2) var(--s-4);
+}
+.hero-foot-label { color: var(--ochre); }
+.hero-foot-towns {
+  font-size: var(--fs-xs);
+  color: var(--on-teal-faint);
+  letter-spacing: 0.02em;
+}
+
+/* Intake form column ----------------------------------------------------- */
+.hero-form { position: relative; z-index: 3; }
+
+/* On desktop the hero owns the first screen outright. align-content centres the
+   whole grid row, so the eyebrow and the form card still start on the same
+   line — the alignment the brief requires survives the centring. */
+@media (min-width: 1024px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100svh - var(--header-h));
+  }
+}
+
+/* ── Breakpoints ────────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1rem, 0.6rem + 2vw, 2rem);
+  }
+  .hero-art { width: 100%; }
+  .hero-art img { object-position: 50% 58%; filter: saturate(0.7) brightness(1.05); }
+  .hero-art::after {
+    background:
+      linear-gradient(
+        to bottom,
+        rgb(15 46 44 / 0.9) 0%,
+        rgb(15 46 44 / 0.93) 45%,
+        rgb(15 46 44 / 0.97) 100%
+      );
+  }
+  .hero-h1 { max-width: 18ch; }
+  .hero-sub { max-width: 46ch; }
+  .hero-foot { margin-top: var(--s-4); padding-top: var(--s-4); }
+}
+
+/* Mobile: every value below is set against the 390x844 fold budget. */
+@media (max-width: 719px) {
+  .hero {
+    --fs-display: 1.85rem;
+    padding-block: 0.6rem 1rem;
+  }
+  .hero-inner { gap: 0.75rem; }
+  .hero-eyebrow { font-size: 0.625rem; margin-top: 0; }
+  .hero-h1 { max-width: none; margin-top: 0.4rem; line-height: 1.05; }
+  .hero-sub {
+    margin-top: 0.55rem;
+    font-size: var(--fs-xs);
+    line-height: 1.42;
+    max-width: none;
+  }
+  .hero-badges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 0.7rem;
+  }
+  .hero-badge {
+    padding: 7px var(--s-2);
+    font-size: 0.6875rem;
+    gap: 6px;
+    letter-spacing: -0.005em;
+  }
+  .hero-badge:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .hero-badge:nth-child(n + 3) { border-top: 1px solid var(--rule-on-teal); }
+  .hero-badge .lucide { --icon: 14px; }
+  .hero-cta {
+    margin-top: 0.7rem;
+    gap: var(--s-2);
+    flex-wrap: nowrap;
+  }
+  .hero-call {
+    flex: 1 1 auto;
+    font-size: var(--fs-sm);
+    padding: 0.72em 0.5em;
+    letter-spacing: 0.01em;
+  }
+  .hero-secondary {
+    flex: 0 1 auto;
+    font-size: var(--fs-xs);
+    padding: 0.72em 0.7em;
+    white-space: nowrap;
+  }
+  .hero-secondary .lucide { --icon: 14px; }
+  .hero-foot { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-secondary .lucide { transition: none; }
+}
+
+/* The shared grain layer paints before the art layer, which left a visible
+   seam where the photo began. Lift it above the photo instead, so the whole
+   hero carries one continuous tooth. */
+.hero.grain::before {
+  z-index: 1;
+  opacity: 0.34;
+}

@@ -1,0 +1,260 @@
+/* Page-level composition only: the shared band/eyebrow/button primitives this
+   site reuses across sections. Every section's own rules live beside its
+   component, namespaced under one root class.
+
+   Nothing in here declares section padding — that stays owned by .section in
+   base.css at single-class weight. */
+
+body {
+  background: var(--cream);
+  color: var(--on-light);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--tr-body);
+}
+
+/* ── Grounds ────────────────────────────────────────────────────────────── */
+.band-cream { background: var(--cream); }
+.band-paper { background: var(--paper-2); }
+.band-wash { background: var(--wash); }
+.band-warm { background: var(--warm); color: var(--on-warm); }
+.band-teal {
+  background: var(--teal-900);
+  color: var(--on-teal);
+}
+
+/* Paper grain — the textured-organic half of the direction, one declaration. */
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 140px 140px;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+.band-teal.grain::before {
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+.grain > * { position: relative; z-index: 1; }
+
+/* ── Type primitives ────────────────────────────────────────────────────── */
+.display {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 600;
+  letter-spacing: var(--tr-display);
+  line-height: var(--lh-display);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label-wide);
+  text-transform: uppercase;
+  color: var(--ochre);
+  margin: 0;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+.eyebrow::after {
+  content: '';
+  flex: none;
+  width: clamp(28px, 5vw, 64px);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+.eyebrow--ink { color: var(--rust); }
+
+/* Section title: Clip Reveal is applied on the wrapper, per DIRECTION.md. */
+.s-title {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display);
+  font-optical-sizing: none;
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--tr-h2);
+  text-wrap: balance;
+  margin: 0;
+}
+.s-title em {
+  font-style: normal;
+  color: var(--rust);
+}
+.band-teal .s-title em { color: var(--ochre); }
+
+.s-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.lede {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--on-light-dim);
+  max-width: 56ch;
+}
+.band-teal .lede { color: var(--on-teal-dim); }
+.band-warm .lede { color: var(--on-warm-dim); }
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+  --btn-bg: var(--rust);
+  --btn-fg: var(--cream);
+  --btn-edge: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  padding: 0.85em 1.35em;
+  border: 1px solid var(--btn-edge);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border-radius: var(--r-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  line-height: 1.1;
+  text-align: center;
+  position: relative;
+  isolation: isolate;
+  transition:
+    background-color var(--hover-dur) var(--ease-out-cubic),
+    color var(--hover-dur) var(--ease-out-cubic),
+    border-color var(--hover-dur) var(--ease-out-cubic),
+    transform var(--hover-dur) var(--ease-out-cubic),
+    box-shadow var(--hover-dur) var(--ease-out-cubic);
+}
+.btn:hover {
+  --btn-bg: var(--rust-600);
+  transform: translateY(-2px);
+  box-shadow: var(--e-2);
+}
+.btn:active { transform: translateY(0); }
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  --btn-edge: var(--rule-strong);
+}
+.btn--ghost:hover {
+  --btn-bg: transparent;
+  --btn-fg: var(--teal);
+  --btn-edge: var(--teal);
+  box-shadow: none;
+}
+
+.btn--ghost-light {
+  --btn-bg: transparent;
+  --btn-fg: var(--on-teal);
+  --btn-edge: var(--rule-on-teal-strong);
+}
+.btn--ghost-light:hover {
+  --btn-bg: rgb(238 234 227 / 0.08);
+  --btn-fg: var(--cream);
+  --btn-edge: var(--ochre);
+  box-shadow: none;
+}
+
+.btn--teal {
+  --btn-bg: var(--teal);
+  --btn-fg: var(--cream);
+}
+.btn--teal:hover { --btn-bg: var(--teal-700); }
+
+.btn--wide { width: 100%; }
+
+/* ── Small shared marks ─────────────────────────────────────────────────── */
+.meta-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-light-faint);
+}
+.band-teal .meta-label { color: var(--on-teal-faint); }
+
+.rule-ochre-double {
+  border-top: 1px solid var(--rule-ochre);
+  border-bottom: 1px solid var(--rule-ochre-soft);
+  height: 3px;
+}
+
+/* Reassurance microcopy that sits beside every form on the page. */
+.reassure {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--on-light-dim);
+}
+.reassure .lucide { --icon: 14px; margin-top: 2px; opacity: 0.8; }
+.band-teal .reassure { color: var(--on-teal-faint); }
+.band-warm .reassure { color: var(--on-warm-dim); }
+
+/* ── Link with an underline that sweeps in, used in nav and footer ──────── */
+.sweep {
+  position: relative;
+  display: inline-block;
+  padding-block: 2px;
+}
+.sweep::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 240ms var(--ease-out-quart);
+}
+.sweep:hover::after,
+.sweep:focus-visible::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep::after { transition: none; }
+  .btn:hover { transform: none; }
+}
+
+/* Skip link, styled to match the page rather than the browser default. */
+.skip-link {
+  background: var(--teal-900);
+  color: var(--on-teal);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  border-radius: var(--r-sm);
+}
+
+/* Everything below the header stacks above the fixed hero art. */
+main { position: relative; z-index: 1; }
+
+/* ── Star row + Google mark, shared by the reviews block and the footer ──── */
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18em;
+  color: var(--ochre);
+}
+.stars .star {
+  --icon: 15px;
+  fill: currentColor;
+  stroke-width: 0;
+}
+.google-g { display: block; flex: none; }

@@ -1,0 +1,260 @@
+/* ── Google Reviews — Testimonial Card Grid / Oversized Quote Mark ────────── */
+
+.rev { position: relative; }
+
+.rev-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.rev .s-title { max-width: 24ch; }
+
+/* Aggregate callout ------------------------------------------------------ */
+.rev-agg {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(1.25rem, 0.6rem + 2.4vw, 3rem);
+  margin-top: var(--s-7);
+  padding: var(--s-5) clamp(1.25rem, 0.6rem + 2vw, 2.25rem);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 2px solid var(--ochre);
+  border-radius: var(--r-xs);
+  box-shadow: var(--e-1);
+}
+
+.rev-agg-score {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+}
+.rev-agg-num {
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display-lg);
+  font-optical-sizing: none;
+  font-weight: 700;
+  font-size: var(--fs-numeral-lg);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  color: var(--teal);
+  font-variant-numeric: tabular-nums;
+}
+.rev-agg-of {
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-light-faint);
+  white-space: nowrap;
+}
+
+.rev-agg-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.rev-agg-body .stars .star {
+  --icon: 18px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 380ms var(--ease-out-cubic) var(--reveal-delay),
+    transform 380ms var(--ease-out-quart) var(--reveal-delay);
+}
+.rev-agg[data-in='true'] .stars .star { opacity: 1; transform: none; }
+
+.rev-agg-count {
+  font-size: var(--fs-sm);
+  color: var(--on-light-dim);
+}
+.rev-agg-count strong { color: var(--on-light); font-weight: 700; }
+
+/* Rating Rule Sweep — the rule is the score. */
+.rev-agg-track {
+  position: relative;
+  height: 2px;
+  background: var(--rule-soft);
+}
+.rev-agg-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 98%;
+  background: var(--ochre);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1500ms var(--ease-out-expo) 120ms;
+}
+.rev-agg[data-in='true'] .rev-agg-fill { transform: scaleX(1); }
+
+.rev-agg-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding-left: clamp(1rem, 2vw, 2rem);
+  border-left: 1px solid var(--rule);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: var(--on-light-dim);
+  white-space: nowrap;
+}
+
+/* Card grid -------------------------------------------------------------- */
+.rev-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+}
+.rev-item {
+  grid-column: span 2;
+  display: flex;
+}
+.rev-item--feature { grid-column: span 4; }
+
+.rev-card {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xs);
+  overflow: hidden;
+  transition:
+    transform var(--hover-dur) var(--ease-out-cubic),
+    box-shadow var(--hover-dur) var(--ease-out-cubic),
+    border-color var(--hover-dur) var(--ease-out-cubic);
+}
+.rev-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--ochre);
+  opacity: 0;
+  transition: opacity var(--hover-dur) var(--ease-out-cubic);
+}
+.rev-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--e-2);
+  border-color: var(--rule-ochre);
+}
+.rev-card:hover::after { opacity: 1; }
+
+.rev-card--feature {
+  background: var(--teal-900);
+  color: var(--on-teal);
+  border-color: transparent;
+}
+.rev-card--feature .rev-quote { color: var(--cream); font-size: var(--fs-lead); }
+.rev-card--feature .rev-name { color: var(--cream); }
+.rev-card--feature .rev-src { color: var(--on-teal-faint); }
+.rev-card--feature .rev-by { border-top-color: var(--rule-on-teal); }
+
+/* Oversized quote mark — the feature card only, per the entry's Avoid-when.
+   Set in flow with negative margins trimming the glyph's own whitespace, so it
+   never gets clipped by the card's overflow. */
+.rev-mark {
+  display: none;
+  font-family: var(--font-display);
+  font-variation-settings: var(--vs-display-lg);
+  font-optical-sizing: none;
+  font-weight: 700;
+  font-size: var(--fs-mark);
+  line-height: 1;
+  color: var(--ochre);
+  opacity: 0.34;
+  margin: -0.3em 0 -0.42em;
+  pointer-events: none;
+  user-select: none;
+}
+.rev-card--feature .rev-mark { display: block; }
+
+.rev-quote {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--on-light-dim);
+  position: relative;
+  z-index: 1;
+}
+.rev-by {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: auto;
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+}
+.rev-name {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--on-light);
+}
+.rev-src {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-light-faint);
+}
+
+.rev-note {
+  margin-top: var(--s-5);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule-soft);
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--on-light-faint);
+  max-width: 62ch;
+}
+
+@media (max-width: 1023px) {
+  .rev-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .rev-item { grid-column: span 2; }
+  .rev-item--feature { grid-column: span 4; }
+  .rev-agg { grid-template-columns: auto 1fr; }
+  .rev-agg-brand {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    padding-top: var(--s-3);
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+}
+
+@media (max-width: 639px) {
+  .rev-head { max-width: none; }
+  .rev-grid { grid-template-columns: minmax(0, 1fr); }
+  .rev-item,
+  .rev-item--feature { grid-column: span 1; }
+  .rev-agg { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); }
+  .rev-agg-score { align-items: baseline; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rev-agg-fill { transition: none; transform: scaleX(1); }
+  .rev-agg-body .stars .star { transition: none; opacity: 1; transform: none; }
+  .rev-card:hover { transform: none; }
+}
+
+/* Cursor-Reactive Glow on the one dark card — light grounds elsewhere on the
+   page are explicitly ruled out for this technique. */
+.rev-card--feature {
+  --glow-color: rgb(217 164 65 / 0.13);
+  --glow-size: 320px;
+}
+.rev-card--feature > * { position: relative; z-index: 2; }
